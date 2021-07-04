@@ -1,24 +1,21 @@
+const path = require("path")
+
 module.exports = {
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    project: 'tsconfig.json',
-    sourceType: 'module',
-  },
-  plugins: ['@typescript-eslint/eslint-plugin'],
-  extends: [
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
-  ],
   root: true,
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    project: path.resolve(`${__dirname}/tsconfig.json`),
+  },
+  plugins: ["@typescript-eslint", "jest"],
+  extends: ["airbnb-typescript/base", "prettier", "prettier/@typescript-eslint"],
   env: {
     node: true,
-    jest: true,
+    "jest/globals": true,
   },
-  ignorePatterns: ['.eslintrc.js'],
   rules: {
-    '@typescript-eslint/interface-name-prefix': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
+    "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+    "class-methods-use-this": 0,
+    "no-const-assign": "warn",
+    "no-this-before-super": "warn",
   },
-};
+}
